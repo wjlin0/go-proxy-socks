@@ -40,10 +40,10 @@ func main() {
 		fmt.Printf("Listen failed: %v\n", err)
 		return
 	}
-	fmt.Println("Listen success")
+	fmt.Println("Listen success: \n" + "socks5://localhost:" + *port)
 	for {
 		client, err := server.Accept()
-		fmt.Println("Receive a connect")
+		//fmt.Print("Receive a connect: ")
 		if err != nil {
 			fmt.Printf("Accept failed: %v", err)
 			continue
