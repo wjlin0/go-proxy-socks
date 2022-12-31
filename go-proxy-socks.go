@@ -87,15 +87,20 @@ func handleConnection(client net.Conn) {
 func checkSocksVersion(client net.Conn) (version int, err error) {
 	b := make([]byte, 256)
 	_, err = io.ReadFull(client, b[:2])
+	//fmt.Println(b[:])
 	//fmt.Println(b)
 	if err != nil {
 		return 0, errors.New("reading header: " + err.Error())
 	}
 
 	version, nNum := int(b[0]), int(b[1])
+	if version != 5 {
+		//fmt.Println("error version:", version)
+		return 0, errors.New(fmt.Sprintf("error version: %v", version))
+	}
 	// 读取 METHODS 列表
-
 	_, err = io.ReadFull(client, b[:nNum])
+	fmt.Println(b[:nNum])
 	if err != nil {
 		return 0, errors.New("reading methods: " + err.Error())
 	}
@@ -103,12 +108,14 @@ func checkSocksVersion(client net.Conn) (version int, err error) {
 	for _, c := range b[:nNum] {
 		if c == 0x00 {
 			r = true
+			break
 		}
 	}
+	//fmt.Println(r)
 	if !r {
-		return 0, errors.New("error method: " + err.Error())
+		return 0, errors.New("error methods: ")
 	}
-
+	//fmt.Println(r)
 	switch version {
 	case 4:
 		_, err = client.Write([]byte{0x04, 0x00})
@@ -122,10 +129,12 @@ func checkSocksVersion(client net.Conn) (version int, err error) {
 		return 0, err
 	}
 
+	fmt.Println(version)
 	return version, nil
 }
 
 func socks4(client net.Conn) (err error) {
+	err = errors.New("暂不支持")
 	return
 }
 
