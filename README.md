@@ -7,6 +7,11 @@
 go get -u -v github.com/wjlin0/go-proxy-socks
 go-proxy-socks --help
 ```
+or
+```bash
+git clone https://github.com/wjlin0/go-proxy-socks
+$PWD/go-proxy-socks/release/go-proxy-socks --help
+```
 
 ## 编译
 ```bash
