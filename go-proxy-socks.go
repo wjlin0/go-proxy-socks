@@ -100,7 +100,7 @@ func checkSocksVersion(client net.Conn) (version int, err error) {
 	}
 	// 读取 METHODS 列表
 	_, err = io.ReadFull(client, b[:nNum])
-	fmt.Println(b[:nNum])
+	//fmt.Println(b[:nNum])
 	if err != nil {
 		return 0, errors.New("reading methods: " + err.Error())
 	}
@@ -129,7 +129,7 @@ func checkSocksVersion(client net.Conn) (version int, err error) {
 		return 0, err
 	}
 
-	fmt.Println(version)
+	//fmt.Println(version)
 	return version, nil
 }
 
