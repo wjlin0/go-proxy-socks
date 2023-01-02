@@ -144,7 +144,7 @@ func socks5(client net.Conn) (err error) {
 	if err != nil {
 		return
 	}
-	f := func(dst, src net.Conn) {
+	f := func(src, dst net.Conn) {
 		defer dst.Close()
 		defer src.Close()
 		go io.Copy(dst, src)
